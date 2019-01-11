@@ -20,7 +20,18 @@ class PeopleActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
 
+        val peopleList = ArrayList<People>()
+
+        val people = intent.extras.getSerializable("people") as People
+
+        peopleList.add(people)
+
+        val adapter = PeopleAdapter(peopleList, applicationContext)
+
+        recyclerView.adapter = adapter
+
     }
+
     // people 1 to 88
     // planets 1 to 61
     // starships 1 to 13

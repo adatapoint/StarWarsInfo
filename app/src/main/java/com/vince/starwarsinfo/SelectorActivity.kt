@@ -1,6 +1,7 @@
 package com.vince.starwarsinfo
 
 import android.app.Dialog
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,10 +15,12 @@ import com.google.gson.Gson
 import com.vince.starwarsinfo.model.People
 import com.vince.starwarsinfo.remote.ApiService
 import com.vince.starwarsinfo.selections.InfoPresenter
+import com.vince.starwarsinfo.selections.PeopleActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.schedulers.IoScheduler
 import kotlinx.android.synthetic.main.activity_selector.*
 import kotlinx.android.synthetic.main.dialog_number_input.*
+import kotlinx.android.synthetic.main.people_adapter.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -63,6 +66,12 @@ class SelectorActivity : AppCompatActivity() {
 
     }
 
+    fun startPeopleActivity(people: People?){
+        val intent = Intent(applicationContext,PeopleActivity::class.java)
+        intent.putExtra("people", people)
+        startActivity(intent)
+    }
+
     fun openDialog(end: String) {
         numberSelectDialog = Dialog(this)
         numberSelectDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -98,6 +107,7 @@ class SelectorActivity : AppCompatActivity() {
                     val people = response?.body()
                     Toast.makeText(applicationContext, "No falló!", Toast.LENGTH_SHORT).show()
                     Log.i("qwer", Gson().toJson(people))
+                    startPeopleActivity(people)
                 }
 
                 override fun onFailure(call: Call<People>, t: Throwable) {

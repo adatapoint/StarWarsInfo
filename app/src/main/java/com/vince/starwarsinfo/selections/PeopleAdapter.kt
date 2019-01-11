@@ -2,15 +2,17 @@ package com.vince.starwarsinfo.selections
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.vince.starwarsinfo.R
 import com.vince.starwarsinfo.R.id.parent
 import com.vince.starwarsinfo.model.People
 
-class PeopleAdapter (val people: AbstractList<People>, val context: Context): RecyclerView.Adapter<PeopleAdapter.ViewHolder>() {
+class PeopleAdapter (val people: ArrayList<People>, val context: Context): RecyclerView.Adapter<PeopleAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.people_adapter, p0,false))
@@ -32,6 +34,7 @@ class PeopleAdapter (val people: AbstractList<People>, val context: Context): Re
             val height: TextView = itemView.findViewById(R.id.height)
 
             name.text = data.name
+            Log.i("qwer",data.name)
             height.text = data.height.toString()
 
         }
